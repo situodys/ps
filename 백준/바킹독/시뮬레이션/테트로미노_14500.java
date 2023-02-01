@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class 테트로미노 {
+public class 테트로미노_14500 {
     //5:31~
     public static int n, m;
     public static int[][] board;
