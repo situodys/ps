@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 public class 합이_0인_네_정수_7453 {
 
     public static int n;
-    public static int[][] numbers;
+    public static int[] a,b,c,d;
     public static int dy[] = {0, 0, -1, 1};
     public static int dx[] = {-1, 1, 0, 0};
     public static int[] result1;
@@ -25,23 +25,27 @@ public class 합이_0인_네_정수_7453 {
 
         n = Integer.parseInt(st.nextToken());
 
-        numbers = new int[4][n];
+        a = new int[n];
+        b = new int[n];
+        c = new int[n];
+        d = new int[n];
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < 4; j++) {
-                numbers[j][i] = Integer.parseInt(st.nextToken());
-            }
+            a[i] = Integer.parseInt(st.nextToken());
+            b[i] = Integer.parseInt(st.nextToken());
+            c[i] = Integer.parseInt(st.nextToken());
+            d[i] = Integer.parseInt(st.nextToken());
         }
 
-        storeSumOfTwo(numbers[0], numbers[1]);
+        storeSumOfTwo(a,b);
 
         Arrays.sort(result1);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                int target = -numbers[2][i] - numbers[3][j];
-                answer += (upperBound(target) - lowerBound(target));
+                int target = c[i] + d[j];
+                answer += (upperBound(-target) - lowerBound(-target));
             }
         }
 
@@ -54,33 +58,32 @@ public class 합이_0인_네_정수_7453 {
         int st=-1,en=result1.length;
         while (st + 1 < en) {
             int mid = (st+en)/2;
-            int cur = result1[mid];
-            if (cur < x) {
+            if (result1[mid] < x) {
                 st=mid;
             }
             else en=mid;
         }
-        return st;
+        return en;
     }
 
     private static int upperBound(int x) {
         int st=-1,en=result1.length;
         while (st + 1 < en) {
             int mid = (st+en)/2;
-            int cur = result1[mid];
-            if (cur <= x) {
+            if (result1[mid] <= x) {
                 st=mid;
             }
             else en=mid;
         }
-        return st;
+        return en;
     }
 
     private static void storeSumOfTwo(int[] number1, int[] number2) {
         result1 = new int[n * n];
+        int idx=0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                result1[i*n+j]=number1[i]+number2[j];
+                result1[idx++]=number1[i]+number2[j];
             }
         }
     }
