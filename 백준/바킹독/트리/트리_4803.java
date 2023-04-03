@@ -67,12 +67,12 @@ public class 트리_4803 {
     }
 
     private static boolean isTree(int start, int[] parents) {
-        Stack<Main.Node> stack =new Stack<>();
-        stack.push(new Main.Node(start,-1));
+        Stack<Node> stack =new Stack<>();
+        stack.push(new Node(start,-1));
         boolean isTree=true;
 
         while(!stack.isEmpty()){
-            Main.Node cur = stack.pop();
+            Node cur = stack.pop();
             if(parents[cur.cur] !=0) continue;
             parents[cur.cur]=cur.prev;
             for(int i=edges[cur.cur].size()-1; i>=0; i--){
@@ -82,7 +82,7 @@ public class 트리_4803 {
                     isTree=false;
                     break;
                 }
-                stack.push(new Main.Node(nxt,cur.cur));
+                stack.push(new Node(nxt,cur.cur));
             }
         }
         return isTree;
