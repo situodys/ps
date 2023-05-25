@@ -12,6 +12,9 @@ import java.util.StringTokenizer;
 
 public class 나무_재테크_16235 {
 
+    //자바에서 우선순위큐는 내부 원소들의 순서는 보장하지 않고 큐의 가장 앞의 값의 순서만을 보장한다.
+    //따라서 기존에 pq를 list로 방어적 복사를 할 경우 생각한 것처럼 순서 보장이 되지 않아 오답을 냈던 것
+
     public static int n, m, k;
     public static int dy[] = {0, 0, -1, 1, 1, 1, -1, -1};
     public static int dx[] = {1, -1, 0, 0, 1, -1, 1, -1};
@@ -68,14 +71,10 @@ public class 나무_재테크_16235 {
     }
 
     private static void spring() {
-        List<int[]> tmp = new ArrayList<>(pq);
-        pq.clear();
-        int len = tmp.size();
-        if (len == 0) {
-            return;
-        }
-        for (int i = 0; i < len; i++) {
-            int[] cur = tmp.get(i);
+        PriorityQueue<int[]> tmp = new PriorityQueue<>(Comparator.comparingInt((int[] a) -> a[2]));
+
+        while(!pq.isEmpty()) {
+            int[] cur = pq.poll();
             int y = cur[0];
             int x = cur[1];
             int age = cur[2];
@@ -85,8 +84,9 @@ public class 나무_재테크_16235 {
             }
 
             feeds[y][x] -= age;
-            pq.offer(new int[]{y, x, age + 1});
+            tmp.offer(new int[]{y, x, age + 1});
         }
+        pq=tmp;
     }
 
     private static void summer() {
