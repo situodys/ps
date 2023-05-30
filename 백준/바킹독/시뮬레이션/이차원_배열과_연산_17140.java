@@ -85,23 +85,23 @@ public class 이차원_배열과_연산_17140 {
 
         for (int i = 0; i < boardByRow.size(); i++) {
             List<Integer> row = boardByRow.get(i);
-            Map<Integer, Main.Node> mp = new HashMap<>();
+            Map<Integer, Node> mp = new HashMap<>();
             for (Integer key : row) {
                 if (key == 0) {
                     continue;
                 }
-                Main.Node node = mp.getOrDefault(key, new Main.Node(key, 0));
+                Node node = mp.getOrDefault(key, new Node(key, 0));
                 node.count++;
                 mp.put(key, node);
             }
-            List<Main.Node> nodes = mp.values().stream().sorted().collect(Collectors.toList());
+            List<Node> nodes = mp.values().stream().sorted().collect(Collectors.toList());
             row.clear();
 
             for (int j = 0; j < nodes.size(); j++) {
                 if (j == 51) {
                     break;
                 }
-                Main.Node node = nodes.get(j);
+                Node node = nodes.get(j);
                 row.add(node.key);
                 row.add(node.count);
             }
@@ -134,23 +134,23 @@ public class 이차원_배열과_연산_17140 {
 
         for (int i = 0; i < boardByCol.size(); i++) {
             List<Integer> row = boardByCol.get(i);
-            Map<Integer, Main.Node> mp = new HashMap<>();
+            Map<Integer, Node> mp = new HashMap<>();
             for (Integer key : row) {
                 if (key == 0) {
                     continue;
                 }
-                Main.Node node = mp.getOrDefault(key, new Main.Node(key, 0));
+                Node node = mp.getOrDefault(key, new Node(key, 0));
                 node.count++;
                 mp.put(key, node);
             }
-            List<Main.Node> nodes = mp.values().stream().sorted().collect(Collectors.toList());
+            List<Node> nodes = mp.values().stream().sorted().collect(Collectors.toList());
             row.clear();
 
             for (int j = 0; j < nodes.size(); j++) {
                 if (j == 51) {
                     break;
                 }
-                Main.Node node = nodes.get(j);
+                Node node = nodes.get(j);
                 row.add(node.key);
                 row.add(node.count);
             }
@@ -178,7 +178,7 @@ public class 이차원_배열과_연산_17140 {
         }
     }
 
-    static class Node implements Comparable<Main.Node> {
+    static class Node implements Comparable<Node> {
         int key;
         int count;
 
@@ -187,7 +187,7 @@ public class 이차원_배열과_연산_17140 {
             this.count = count;
         }
 
-        public int compareTo(Main.Node node) {
+        public int compareTo(Node node) {
             if (this.count == node.count) {
                 return this.key - node.key;
             }
